@@ -19,7 +19,7 @@ import java.util.concurrent.CompletableFuture;
  * Created by alex on 9/6/2015.
  */
 @Component
-@HandlerPath(path = "/")
+@HandlerPath(path = "/mongo")
 public class HelloHandler implements HttpHandler {
 
     @Value("${mongo.db}")
