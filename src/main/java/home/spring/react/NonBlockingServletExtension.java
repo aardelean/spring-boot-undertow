@@ -41,7 +41,7 @@ public class NonBlockingServletExtension implements ServletExtension{
                         rootHandler.addPrefixPath(path, httpHandler);
                     }
                 }
-                CachingResourceManager cachingResourceManager = new CachingResourceManager(100, 10000,
+                CachingResourceManager cachingResourceManager = new CachingResourceManager(16*1024*1024, 16*1024*1024,
                         new DirectBufferCache(1000, 10, 1000 * 10 * 1000,
                                 BufferAllocator.DIRECT_BYTE_BUFFER_ALLOCATOR),
                         new ClassPathResourceManager(NonBlockingServletExtension.class.getClassLoader()),20000000);

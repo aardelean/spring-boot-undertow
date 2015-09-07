@@ -71,7 +71,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>home.spring.react.ReactAndSpringDataRestApplication</mainClass>
+                            <mainClass>home.spring.react.Starter</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -88,7 +88,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>home.spring.react.ReactAndSpringDataRestApplication</mainClass>
+                            <mainClass>home.spring.react.Starter</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

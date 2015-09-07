@@ -5,21 +5,15 @@ import com.mongodb.MongoCredential;
 import com.mongodb.async.client.MongoClient;
 import com.mongodb.async.client.MongoClientSettings;
 import com.mongodb.async.client.MongoClients;
+import com.mongodb.async.client.MongoDatabase;
 import com.mongodb.connection.ClusterSettings;
-import com.mongodb.connection.ServerSettings;
-import io.undertow.Undertow;
-import io.undertow.server.HttpHandler;
-import io.undertow.server.HttpServerExchange;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
-import org.springframework.boot.context.embedded.undertow.UndertowBuilderCustomizer;
 import org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.*;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.annotation.Order;
 import org.springframework.web.WebApplicationInitializer;
 
 import java.util.Collections;
@@ -30,10 +24,7 @@ import java.util.Collections;
 @Configuration
 @ComponentScan("home.spring.react")
 @Import(PropertiesConfiguration.class)
-public class ReactAndSpringDataRestApplication extends SpringBootServletInitializer implements WebApplicationInitializer {
-
-    @Value("${port}")
-    private Integer serverPort;
+public class Starter extends SpringBootServletInitializer implements WebApplicationInitializer {
 
     @Value("${threads}")
     private Integer threads;
@@ -56,41 +47,29 @@ public class ReactAndSpringDataRestApplication extends SpringBootServletInitiali
     @Value("${mongo.port}")
     private Integer mongoPort;
 
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(ReactAndSpringDataRestApplication.class);
+        return application.sources(Starter.class);
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(ReactAndSpringDataRestApplication.class, args);
+        SpringApplication.run(Starter.class, args);
     }
 
     @Bean
     public EmbeddedServletContainerFactory embeddedServletContainerFactory(){
         UndertowEmbeddedServletContainerFactory undertowEmbeddedServletContainerFactory = new UndertowEmbeddedServletContainerFactory();
-        undertowEmbeddedServletContainerFactory.addBuilderCustomizers(new UndertowBuilderCustomizer() {
-
-            @Override
-            public void customize(Undertow.Builder builder) {
-                builder.setHandler(new HttpHandler() {
-                    @Override
-                    public void handleRequest(HttpServerExchange exchange) throws Exception {
-                        exchange.getResponseSender().send("error");
-                    }
-                });
-                builder.addHttpListener(serverPort, "0.0.0.0");
-            }
-        });
         undertowEmbeddedServletContainerFactory.setIoThreads(threads);
         undertowEmbeddedServletContainerFactory.setWorkerThreads(workers);
         return undertowEmbeddedServletContainerFactory;
     }
     @Bean
-    public MongoClient mongoClient(){
+    public MongoDatabase mongoClient(){
         MongoCredential credential = MongoCredential.createMongoCRCredential(mongoUsername, mongoDatabase, mongoPassword.toCharArray());
         ConnectionString connectionString = new ConnectionString("mongodb://" + mongoHost + ":" + mongoPort);
         MongoClient client = MongoClients.create(MongoClientSettings.builder().credentialList(Collections.singletonList(credential))
                 .clusterSettings(ClusterSettings.builder().applyConnectionString(connectionString).build()).build());
-        return client;
+        return client.getDatabase(mongoDatabase);
     }
 }
