@@ -1,6 +1,5 @@
-package home.spring.react;
+package home.boot;
 
-import io.undertow.predicate.Predicate;
 import io.undertow.predicate.Predicates;
 import io.undertow.server.HandlerWrapper;
 import io.undertow.server.HttpHandler;

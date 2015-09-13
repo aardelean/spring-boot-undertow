@@ -1,8 +1,9 @@
-package home.spring.react;
+package home.boot.nio;
 
 import com.mongodb.async.client.MongoCollection;
 import com.mongodb.async.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import home.boot.HandlerPath;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import org.bson.Document;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @HandlerPath(path = "/mongo")
-public class HelloHandler implements HttpHandler {
+public class MongoHandler implements HttpHandler {
 
     private final static String id="eefa89c4-ec21-11e4-b08b-b75697636679-8e488775";
 
