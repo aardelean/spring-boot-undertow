@@ -26,7 +26,6 @@ import java.nio.file.Paths;
 public class FileController {
 
     @Cacheable("file")
-    @ResponseBody
     @RequestMapping(value = "/{file_name}", method = RequestMethod.GET)
     public Resource getFile(@PathVariable("file_name") String fileName) {
         System.out.println("file access on disk");
@@ -34,7 +33,7 @@ public class FileController {
     }
 
     /**
-     * Useless as the above does the same much faster.
+     * Useless as the above does the same much shorter code.
      * @param fileName
      * @return
      * @throws FileNotFoundException

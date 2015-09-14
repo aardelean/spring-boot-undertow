@@ -18,6 +18,8 @@ import org.springframework.context.annotation.Configuration;
 @EnableCaching
 public class CacheConfiguration {
 
+
+
     @Bean
     public CacheManager infinispanCacheManager() {
         org.infinispan.configuration.cache.Configuration cacheConfig = new ConfigurationBuilder().persistence()

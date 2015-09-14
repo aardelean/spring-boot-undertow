@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-//@Configuration
+@Configuration
 public class PersistenceJPAConfig {
 
 	@Value("${spring.datasource.driver}")
@@ -36,6 +36,7 @@ public class PersistenceJPAConfig {
 		em.setDataSource(dataSource);
 		em.setPackagesToScan("home.boot.entities");
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+//		vendorAdapter.
 		em.setJpaVendorAdapter(vendorAdapter);
 		em.setJpaProperties(additionalProperties());
 		return em;
@@ -44,11 +45,15 @@ public class PersistenceJPAConfig {
 	@Bean
 	@Qualifier("dataSource")
 	public DataSource dataSource() {
-		DriverManagerDataSource datasource = new DriverManagerDataSource();
+		org.apache.tomcat.jdbc.pool.DataSource datasource = new org.apache.tomcat.jdbc.pool.DataSource();
 		datasource.setDriverClassName(driverClass);
 		datasource.setUrl(url);
 		datasource.setUsername(username);
 		datasource.setPassword(password);
+		datasource.setMaxActive(256);//important
+		datasource.setMinIdle(10);
+		datasource.setMaxIdle(3000);//release time, important
+		datasource.setInitialSize(50);//skip the warm up, we have ram
 		return datasource;
 	}
 
@@ -63,17 +68,19 @@ public class PersistenceJPAConfig {
 	private Properties additionalProperties() {
 		Properties properties = new Properties();
 		properties.setProperty("hibernate.hbm2ddl.auto", "update");
-//		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-//		properties.setProperty("hibernate.jdbc.batch_size", "20");
+		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+		properties.setProperty("hibernate.jdbc.batch_size", "20");
 		properties.setProperty("hibernate.id.new_generator_mappings", "false");
 //		properties.setProperty("hibernate.connection.release_mode","after_statement");
+
+		// second level cache configurations
 //		properties.setProperty("hibernate.use_second_level_cache", "true");
 //		properties.setProperty("hibernate.cache.use_query_cache", "true");
 //		properties.setProperty("hibernate.cache.region.factory_class",
 //				"org.hibernate.cache.infinispan.InfinispanRegionFactory");
 //		properties.setProperty("hibernate.cache.infinispan.cachemanager",
 //				"java:CacheManager/Employee");
-//		properties.setProperty("hibernate.naming-strategy", "org.hibernate.cfg.DefaultNamingStrategy");
+//		properties.setProperty("hibernate.naming-strategy", "org.springframework.boot.orm.jpa.SpringNamingStrategy");
 //		properties.setProperty("hibernate.generate_statistics", "true");
 //		properties.setProperty("hibernate.transaction.manager_lookup_class",
 //				"org.infinispan.transaction.lookup.GenericTransactionManagerLookup");

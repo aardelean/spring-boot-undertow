@@ -6,6 +6,8 @@ import org.infinispan.manager.EmbeddedCacheManager;
 import org.infinispan.spring.provider.SpringEmbeddedCacheManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory;
@@ -23,8 +25,8 @@ import org.springframework.web.WebApplicationInitializer;
 @Configuration
 @ComponentScan("home.boot")
 @PropertySource("classpath:application.properties")
-@EnableAutoConfiguration
-@Import({MongoConfiguration.class, /*PersistenceJPAConfig.class,*/CacheConfiguration.class})
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+@Import({MongoConfiguration.class, PersistenceJPAConfig.class,CacheConfiguration.class})
 public class Starter extends SpringBootServletInitializer implements WebApplicationInitializer {
 
     @Override
@@ -39,7 +41,8 @@ public class Starter extends SpringBootServletInitializer implements WebApplicat
     @Bean
     public EmbeddedServletContainerFactory embeddedServletContainerFactory(){
         UndertowEmbeddedServletContainerFactory result = new UndertowEmbeddedServletContainerFactory();
-//        result.setWorkerThreads(70);
+        result.setDirectBuffers(true);
+        result.setIoThreads(7);
         return result;
     }
 

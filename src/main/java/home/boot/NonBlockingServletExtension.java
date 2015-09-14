@@ -40,10 +40,10 @@ public class NonBlockingServletExtension implements ServletExtension{
                         rootHandler.addPrefixPath(path, httpHandler);
                     }
                 }
-                CachingResourceManager cachingResourceManager = new CachingResourceManager(16*1024*1024, 16*1024*1024,
-                        new DirectBufferCache(1000, 10, 1000 * 10 * 1000,
+                CachingResourceManager cachingResourceManager = new CachingResourceManager(16*1024, 16*1024,
+                        new DirectBufferCache(16*1024, 10, 1000 * 10 * 1000,
                                 BufferAllocator.DIRECT_BYTE_BUFFER_ALLOCATOR),
-                        new ClassPathResourceManager(NonBlockingServletExtension.class.getClassLoader()),20000000);
+                        new ClassPathResourceManager(NonBlockingServletExtension.class.getClassLoader()),2000000);
                 final ResourceHandler resourceHandler = new ResourceHandler(cachingResourceManager);
                 PredicateHandler predicateHandler = new PredicateHandler(Predicates.suffix("html"), resourceHandler, handler);
                 rootHandler.addPrefixPath("/file",predicateHandler);
