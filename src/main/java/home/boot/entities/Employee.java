@@ -1,4 +1,4 @@
-package home.spring.react;
+package home.boot.entities;
 
 import lombok.Data;
 
