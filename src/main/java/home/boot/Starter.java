@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory;
@@ -26,7 +27,7 @@ import org.springframework.web.WebApplicationInitializer;
 @ComponentScan("home.boot")
 @PropertySource("classpath:application.properties")
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
-@Import({MongoConfiguration.class, PersistenceJPAConfig.class,CacheConfiguration.class})
+@Import({MongoConfiguration.class, PersistenceJPAConfig.class, CacheConfiguration.class, /*ThymeleafConfiguration.class*/})
 public class Starter extends SpringBootServletInitializer implements WebApplicationInitializer {
 
     @Override

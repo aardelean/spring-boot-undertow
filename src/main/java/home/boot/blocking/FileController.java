@@ -5,6 +5,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
@@ -24,6 +25,12 @@ import java.nio.file.Paths;
 @RestController
 @RequestMapping("/blocking")
 public class FileController {
+    private static final  String responseString = "{name: 'Max, lastname: 'Mustermann', occupation: 'developer'}";
+
+    @RequestMapping(value = "/json", method = RequestMethod.GET)
+    public String getSimpleJson(){
+        return responseString;
+    }
 
     @Cacheable("file")
     @RequestMapping(value = "/{file_name}", method = RequestMethod.GET)

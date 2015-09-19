@@ -73,6 +73,11 @@ public class PersistenceJPAConfig {
 		properties.setProperty("hibernate.id.new_generator_mappings", "false");
 
 		// second level cache configurations
+		addLevel2Cache(properties);
+		return properties;
+	}
+
+	private void addLevel2Cache(Properties properties){
 		properties.setProperty("hibernate.cache.region.factory_class", "org.hibernate.cache.infinispan.InfinispanRegionFactory");
 		properties.setProperty("hibernate.cache.infinispan.cachemanager","java:CacheManager/Employee");
 		properties.setProperty("hibernate.use_second_level_cache", "true");
@@ -84,7 +89,5 @@ public class PersistenceJPAConfig {
 		properties.setProperty("hibernate.naming-strategy", "org.springframework.boot.orm.jpa.SpringNamingStrategy");
 //		properties.setProperty("hibernate.generate_statistics", "true");
 		properties.setProperty("hibernate.transaction.manager_lookup_class", "org.infinispan.transaction.lookup.GenericTransactionManagerLookup");
-
-		return properties;
 	}
 }

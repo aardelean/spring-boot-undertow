@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 @HandlerPath(path="/json")
 public class JsonHandler implements HttpHandler {
-    private static final  String responseString = "{name: 'Alex, lastname: 'Ardelean', occupation: 'developer'}";
+    private static final  String responseString = "{name: 'Max, lastname: 'Mustermann', occupation: 'developer'}";
 
     @Override
     public void handleRequest(HttpServerExchange exchange) throws Exception {
