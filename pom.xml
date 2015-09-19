@@ -13,8 +13,8 @@
         <version>1.2.5.RELEASE</version>
     </parent>
     <properties>
-        <!--<hibernate-entitymanager.version>5.0.1.Final</hibernate-entitymanager.version>-->
-        <!--<hibernate.version>5.0.1.final</hibernate.version>-->
+        <hibernate-entitymanager.version>5.0.1.Final</hibernate-entitymanager.version>
+        <hibernate.version>5.0.1.final</hibernate.version>
     </properties>
     <dependencies>
         <dependency>
@@ -50,8 +50,18 @@
             <groupId>io.undertow</groupId>
             <artifactId>undertow-core</artifactId>
             <version>1.2.11.Final</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jboss-logging</artifactId>
+                    <groupId>org.jboss.logging</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <version>3.3.0.Final</version>
+        </dependency>
         <dependency>
             <groupId>io.undertow</groupId>
             <artifactId>undertow-servlet</artifactId>

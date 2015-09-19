@@ -71,7 +71,6 @@ public class PersistenceJPAConfig {
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 		properties.setProperty("hibernate.jdbc.batch_size", "20");
 		properties.setProperty("hibernate.id.new_generator_mappings", "false");
-//		properties.setProperty("hibernate.connection.release_mode","after_statement");
 
 		// second level cache configurations
 //		properties.setProperty("hibernate.use_second_level_cache", "true");
