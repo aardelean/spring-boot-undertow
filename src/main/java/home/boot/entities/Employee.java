@@ -2,6 +2,7 @@ package home.boot.entities;
 
 import lombok.Data;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
  */
 @Data
 @Entity
+@Cacheable(true)
 public class Employee {
 
     private @Id @GeneratedValue Long id;

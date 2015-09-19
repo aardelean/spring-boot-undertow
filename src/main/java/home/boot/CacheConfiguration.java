@@ -28,7 +28,7 @@ public class CacheConfiguration {
                 .entityClass(Employee.class)
                 .build();
         EmbeddedCacheManager cacheManager = new DefaultCacheManager();
-        cacheManager.defineConfiguration("employees", cacheConfig);
+        cacheManager.defineConfiguration("Employee", cacheConfig);
         return new SpringEmbeddedCacheManager(cacheManager);
     }
 }
