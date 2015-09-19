@@ -16,11 +16,16 @@ Technologies used:
  - jpa level 2 cache cache wrapper over infinispan (useful for caching in cluster of servers, to ease up mysql load)
  - spring controller (custom web operations)
  - async connectors to io.
- 
- Example publishes a few endpoints. I also did tests with jmeter for all over endpoints. 
- The tests have the result in responses per second.
- The setup: jmeter, server, mongo, mysql all running on the same machine,
- intel xeon E31235 8 core 3.2 Ghz, 8 GB DDR3 - 2000MHZ:
+ - thymeleaf templating.
+
+Start server:
+mvn clean install
+java -jar target/spring-undertow.jar
+
+Example publishes a few endpoints. I also did tests with jmeter for all over endpoints.
+The tests have the result in responses per second.
+The setup: jmeter, server, mongo, mysql all running on the same machine,
+intel xeon E31235 8 core 3.2 Ghz, 8 GB DDR3 - 2000MHZ:
  - blocking  
     - mysql
         - pool of connections  - 3.300 
@@ -49,5 +54,6 @@ Technologies used:
       - http://localhost:8080/file/index.html
     - json serving - 12.000.
       - http://localhost:8080/json
-    
+    - thymeleaf templating - 1275 (also a file, same problem with jmeter)
+      - http://localhost:8080/template/home
     
