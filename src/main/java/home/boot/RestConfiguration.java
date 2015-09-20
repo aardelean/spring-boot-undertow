@@ -12,11 +12,11 @@ import org.springframework.http.MediaType;
 public class RestConfiguration extends RepositoryRestMvcConfiguration{
 
     @Override
-    public RepositoryRestConfiguration config() {
-        RepositoryRestConfiguration config = super.config();
+    protected void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
         config.setDefaultMediaType(MediaType.APPLICATION_JSON);
         config.setBaseUri("/api");
+        config.setReturnBodyOnCreate(true);
+        config.setReturnBodyOnUpdate(true);
         config.useHalAsDefaultJsonMediaType(false);
-        return config;
     }
 }
