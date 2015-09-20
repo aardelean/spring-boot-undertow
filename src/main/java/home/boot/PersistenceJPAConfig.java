@@ -50,9 +50,9 @@ public class PersistenceJPAConfig {
 		datasource.setUrl(url);
 		datasource.setUsername(username);
 		datasource.setPassword(password);
-		datasource.setMaxActive(256);//important
+		datasource.setMaxActive(200);//important
 		datasource.setMinIdle(10);
-		datasource.setMaxIdle(3000);//release time, important
+		datasource.setMaxIdle(10);//release time, important
 		datasource.setInitialSize(50);//skip the warm up, we have ram
 		return datasource;
 	}
@@ -73,7 +73,7 @@ public class PersistenceJPAConfig {
 		properties.setProperty("hibernate.id.new_generator_mappings", "false");
 
 		// second level cache configurations
-		addLevel2Cache(properties);
+//		addLevel2Cache(properties);
 		return properties;
 	}
 

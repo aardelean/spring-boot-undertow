@@ -17,6 +17,7 @@ Technologies used:
  - spring controller (custom web operations)
  - async connectors to io.
  - thymeleaf templating.
+ - react js example
 
 Start server:
 mvn clean install
@@ -31,7 +32,7 @@ intel xeon E31235 8 core 3.2 Ghz, 8 GB DDR3 - 2000MHZ:
         - pool of connections  - 3.300 
         - without pool of connections   - 650
         - mysql jpa level 2 cache   - 4.000 (could prove more useful in cluster than just one server)
-         - http://localhost:8080/employees/1
+         - http://localhost:8080/api/employees/1
         - mysql spring cache   - 6.000 (not much mysql since spring caches and serves back based on the parameters)
          - http://localhost:8080/blocking/employee/cached/1
     - simple json serving - 10.000
@@ -39,7 +40,7 @@ intel xeon E31235 8 core 3.2 Ghz, 8 GB DDR3 - 2000MHZ:
     - static file serving - 1.275 (I believe the jmeter is not properly configured as it never varies here in the tests, 
     and the result seems to be way to low compared to others)
       - http://localhost:8080/blocking/index
-  - non blocking (nio)
+ - non blocking (nio)
     - mongo db - 10.000
       - http://localhost:8080/mongo
     - mysql 
@@ -56,4 +57,6 @@ intel xeon E31235 8 core 3.2 Ghz, 8 GB DDR3 - 2000MHZ:
       - http://localhost:8080/json
     - thymeleaf templating - 1275 (also a file, same problem with jmeter)
       - http://localhost:8080/template/home
+
+React js example added with url : http://localhost:8080/template/react-ex
     

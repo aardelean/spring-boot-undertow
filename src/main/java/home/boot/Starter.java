@@ -27,7 +27,7 @@ import org.springframework.web.WebApplicationInitializer;
 @ComponentScan("home.boot")
 @PropertySource("classpath:application.properties")
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
-@Import({MongoConfiguration.class, PersistenceJPAConfig.class, CacheConfiguration.class, /*ThymeleafConfiguration.class*/})
+@Import({/*MongoConfiguration.class, */PersistenceJPAConfig.class, CacheConfiguration.class, RestConfiguration.class,/*ThymeleafConfiguration.class*/})
 public class Starter extends SpringBootServletInitializer implements WebApplicationInitializer {
 
     @Override
