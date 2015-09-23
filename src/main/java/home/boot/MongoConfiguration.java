@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Created by alex on 9/12/2015.
  */
-//@Configuration
+@Configuration
 public class MongoConfiguration {
     @Value("${mongo.host}")
     private String mongoHost;
