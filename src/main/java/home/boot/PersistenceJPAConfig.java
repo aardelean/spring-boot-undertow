@@ -73,7 +73,7 @@ public class PersistenceJPAConfig {
 		properties.setProperty("hibernate.id.new_generator_mappings", "false");
 
 		// second level cache configurations
-		addLevel2Cache(properties);
+//		addLevel2Cache(properties);
 		return properties;
 	}
 

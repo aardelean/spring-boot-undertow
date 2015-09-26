@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 /**
  * Created by alex on 9/6/2015.
  */
-//@Component
-//@HandlerPath(path = "/mongo")
+@Component
+@HandlerPath(path = "/mongo")
 public class MongoHandler implements HttpHandler {
 
     private final static String id="eefa89c4-ec21-11e4-b08b-b75697636679-8e488775";
